@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MvcWebProje.Models.Model.Blog>
+
+
+
+<ul class="recent">
+    @foreach (var item in Model)
+    {
+        <li>
+            <img src="@item.ResimURL" class="pull-left" alt="@item.Baslik" />
+            <h6><a href="/Home/BlogDetay/@item.BlogId">@item.Baslik</a></h6>
+            <p>
+                @{
+                    if (item.Icerik.Length < 50)
+                    {
+                        Html.Raw(item.Icerik);
+                    }
+                    else
+                    {
+                        Html.Raw(item.Icerik.Substring(0,50));
+                    }
+                }
+            </p>
+        </li>
+
+    }
+
+</ul>

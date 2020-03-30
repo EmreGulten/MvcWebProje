@@ -1,0 +1,25 @@
+﻿
+@model IEnumerable<MvcWebProje.Models.Model.Yorum>
+
+
+@{
+    Layout = null;
+}
+
+<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+    <i class="icon-bell-l"></i>
+
+    <span class="badge bg-important"> @Model.Count(x => x.Onay == false)</span>
+
+</a>
+<ul class="dropdown-menu extended notification">
+    @*<div class="notify-arrow notify-arrow-blue"></div>*@
+    <li>
+        <p class="blue">Bekleyen Yorum Sayısı  @Model.Count(x => x.Onay == false)</p>
+    </li>
+
+    <li>
+        <a href="/Yorum/Index/">Yorumları Onayla</a>
+    </li>
+</ul>

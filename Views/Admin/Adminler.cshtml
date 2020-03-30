@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MvcWebProje.Models.Model.Admin>
+
+@{
+    ViewBag.Title = "Adminler";
+    Layout = "~/Views/Shared/_AdminLayout .cshtml";
+}
+
+<h2>Adminler</h2>
+
+<p>
+    @Html.ActionLink("Yeni Ekle", "Create")
+</p>
+<table class="table" id="Sil1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Eposta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sifre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Yetki)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Eposta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sifre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Yetki)
+            </td>
+            <td>
+                @Html.ActionLink("Güncelle", "Edit", new { id = item.AdminId }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Detay", "Details", new { id = item.AdminId }, new { @class = "btn btn-info" }) |
+                <a class="btn btn-warning btnSil" data-id="@item.AdminId">Sil</a>
+            </td>
+        </tr>
+    }
+
+</table>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#Sil1").on("click", ".btnSil", function () {
+            if (confirm("Silmek İstediğinize Eminmisiniz?")) {
+                var id = $(this).data("id");
+                var btn = $(this);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/Delete/" + id,
+                    success: function () {
+                        btn.parent().parent().remove();
+                    }
+
+                });
+            }
+
+        });
+    });
+
+</script>
+
